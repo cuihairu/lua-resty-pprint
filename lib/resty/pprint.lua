@@ -11,11 +11,14 @@ local tostring = tostring
 local next = next
 
 local _M = { version = "0.1" }
-
+local MAX_DEP = 30 
 local function _lprint (lua_table,ret,indent)
     indent = indent or 0
     local arg_type = type(lua_table)
     local szPrefix = string.rep("    ", indent)
+    if indent >= MAX_DEP then
+        return tinsert(ret,szPrefix.."endless")
+    end
     if arg_type ~= "table"  then
         return tinsert(ret,szPrefix..tostring(lua_table))
     end 
