@@ -35,11 +35,10 @@ local function _lprint (lua_table,ret,indent)
         else 
             k = tostring(k)
         end
-        local szSuffix = ""
         if vtype == "table" then
             szSuffix = "{"
         end
-        local szPrefix = string.rep("    ", indent)
+        szPrefix = string.rep("    ", indent)
         formatting = szPrefix.."["..k.."]".." = "..szSuffix
         if vtype == "table"   then
             tinsert(ret,formatting)
