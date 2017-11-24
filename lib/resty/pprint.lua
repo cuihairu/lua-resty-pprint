@@ -4,6 +4,7 @@ when then string exceeds 2048 bytes ,it will not be displayed properly.
 local print = print 
 local tconcat = table.concat
 local tinsert = table.insert
+local sformat = string.format
 local srep = string.rep
 local type = type
 local pairs = pairs
@@ -15,7 +16,7 @@ local MAX_DEP = 30
 local function _lprint (lua_table,ret,indent)
     indent = indent or 0
     local arg_type = type(lua_table)
-    local szPrefix = string.rep("    ", indent)
+    local szPrefix = srep("    ", indent)
     if indent >= MAX_DEP then
         return tinsert(ret,szPrefix.."endless")
     end
@@ -31,14 +32,14 @@ local function _lprint (lua_table,ret,indent)
         local vtype = type(v)
         local ktype = type(k)
         if ktype == "string" then
-            k = string.format("%q", k)
+            k = sformat("%q", k)
         else 
             k = tostring(k)
         end
         if vtype == "table" then
             szSuffix = "{"
         end
-        szPrefix = string.rep("    ", indent)
+        szPrefix = srep("    ", indent)
         formatting = szPrefix.."["..k.."]".." = "..szSuffix
         if vtype == "table"   then
             tinsert(ret,formatting)
@@ -47,7 +48,7 @@ local function _lprint (lua_table,ret,indent)
         else
             local szValue = ""
             if vtype == "string" then
-                szValue = string.format("%q", v)
+                szValue = sformat("%q", v)
             else
                 szValue = tostring(v)
             end
