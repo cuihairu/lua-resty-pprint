@@ -11,7 +11,7 @@ local pairs = pairs
 local tostring = tostring
 local next = next
 
-local _M = { version = "0.1" }
+local _M = { _VERSION = "0.1" }
 local MAX_DEP = 30 
 local function _lprint (lua_table,ret,indent)
     indent = indent or 0
